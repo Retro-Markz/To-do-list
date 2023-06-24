@@ -3,24 +3,46 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
-app.get("/", function(req, res){
-    
+app.get("/", function (req, res) {
+
     var today = new Date();
     var currentDay = today.getDay();
+    var day = "";
 
-    if(currentDay === 6 || currentDay === 0){
-            res.write("<h1>oh si! fin de semana paps'</h1>");
+    switch (currentDay) {
+        case 0:
+            day = "domingo";
+            break;
+        case 1:
+            day = "lunes";
+            break;
+        case 2:
+            day = "martes";
+            break;
+        case 3:
+            day = "miercoles";
+            break;
+        case 4:
+            day = "jueves";
+            break;
+        case 5:
+            day = "viernes";
+            break;
+        case 6:
+            day = "sabado";
+            break;
+
+        default:
+            console.log("error: el dia es: " + currentDay);
+           
     }
-    else{
-            res.write("<h1>chale! a chambear</h1>");
-            res.send();
-    }
- 
+
+    res.render("list", { KindOfDay: day });
 
 });
 
-app.listen(3000, function(){
+app.listen(3000, function () {
     console.log("server is }runing on port 3000");
 });
