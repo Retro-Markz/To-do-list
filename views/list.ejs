@@ -10,12 +10,17 @@
    <h1> <%= KindOfDay %>   </h1>
 
     <ul>
-        <li>comprar comida</li>
-        <li>hacer comida</li>
-        <li>comer</li>
+       
+       <% for (var i = 0; i < newListItems.length; i++){ %>
+            <li> <%= newListItems[i] %> </li>
+            <% } %>
         
     </ul>
     
+    <form action="/" method="post">
+        <input type="text" name="newItem">
+        <button type="submit" name="button">agregar</button>
+    </form>
     
 </body>
 </html>     

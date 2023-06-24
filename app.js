@@ -3,14 +3,18 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+var items = [];
+
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.urlencoded({extended:true}));
+
+
 
 app.get("/", function (req, res) {
 
     var today = new Date();
     
-   
-
     const options = {
         weekday: "long",    
         day: "numeric",
@@ -20,9 +24,19 @@ app.get("/", function (req, res) {
     var day = today.toLocaleDateString("en-US", options);       
     
 
-    res.render("list", { KindOfDay: day });
+    res.render("list", { KindOfDay: day, newListItems: items});
 
 });
+
+
+    app.post("/", function(req, res){
+     var item = req.body.newItem;
+
+    items.push(item);
+
+      res.redirect("/");
+     
+    });
 
 app.listen(3000, function () {
     console.log("server is runing on port 3000");
