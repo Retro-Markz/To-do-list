@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
             console.log("error: el dia es: " + currentDay);
            
     }
-
+|
     res.render("list", { KindOfDay: day });
 
 });
